@@ -5,18 +5,17 @@ void main() {
     debugShowCheckedModeBanner: false, //para não exibir a faixa de status debug
     title: "Frases do dia2 ",
     home: Container(
-      padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
-      margin: EdgeInsets.fromLTRB(20, 25, 20, 25),
+      margin: EdgeInsets.only(top: 40),
       decoration:
           BoxDecoration(border: Border.all(width: 3, color: Colors.white)),
-      child: Column(
+      child: Row(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, //hozizontal
+        crossAxisAlignment: CrossAxisAlignment.start, // vertical
         children: [
-          Text("Texto 1"),
-          Padding(
-            padding: EdgeInsets.only(top: 20, bottom: 40),
-            child: Text("Texto 2"),
-          ),
-          Text("Texto 3"),
+          Text("T1"),
+          Text("T2"),
+          Text("T3"),
         ],
       ),
     ),
