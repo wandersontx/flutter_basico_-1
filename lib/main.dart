@@ -1,74 +1,74 @@
-import 'package:flutter/material.dart';
 
-/*
-  Stateless -> Widgets que não podem ser alterados
-  Stateful  -> Widgets que podem ser alterados
- */
+import 'package:flutter/material.dart';
+import 'dart:math';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: HomeStatuful(),
+    home: Home(),
   ));
 }
 
-class HomeStatuful extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _HomeStatufulState createState() => _HomeStatufulState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomeStatufulState extends State<HomeStatuful> {
-  var _texto = "Wanderson Teixeira";
+class _HomeState extends State<Home> {
+  var _frases = [
+    "Os problemas são oportunidades para se mostrar o que sabe.",
+    "Tente de novo. Fracasse de novo. Mas fracasse melhor",
+    "É costume de um tolo, quando erra, queixar-se dos outros. É costume de um sábio queixar-se de si mesmo",
+    "A felicidade não está em fazer o que a gente quer, e sim querer o que a gente faz",
+    "Nada acontece a menos que sonhemos antes",
+    "É sempre divertido fazer o impossível",
+    "Experiência é o nome que cada um dá a seus erros",
+  ];
+  var _fraseGerada = "Clique aqui para gerar uma frase";
+
+  void _gerarFrase() {
+    setState(() {
+      var numSorteado = Random().nextInt(_frases.length);
+    _fraseGerada = _frases[numSorteado];
+    });
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Whatsapp - Home - Stateful"),
+        title: Text("Frases do dia"),
         backgroundColor: Colors.green,
       ),
       body: Container(
-        child: Column(
-          children: [
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  _texto = 'Curso Flutter';
-                });
-              },
-              color: Colors.amber,
-              child: Text("Clique aqui"),
-            ),
-            Text("Nome: $_texto")
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var _titulo = "Instagram";
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_titulo + " - Home"),
-        backgroundColor: Colors.green,
-      ),
-      body: Padding(
         padding: EdgeInsets.all(16),
-        child: Text("Conteúdo principal"),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.lightGreen,
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Text("Texto 1"),
-              Text("Texto 2"),
-            ],
-          ),
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset("assets/images/logo.png"),
+            Text(
+              _fraseGerada,
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                fontSize: 23,
+                fontStyle: FontStyle.italic,
+                color: Colors.black
+              ),
+            ),
+            RaisedButton(
+              onPressed: _gerarFrase, //faz com o metodo seja sempre chamado ao clicar no botão
+              child: Text(
+                "nova frase",
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+                ),
+                ),
+              color: Colors.green,
+              )
+          ],
         ),
       ),
     );
